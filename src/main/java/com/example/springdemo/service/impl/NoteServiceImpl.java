@@ -7,10 +7,7 @@ import com.example.springdemo.dto.NoteListDTO;
 import com.example.springdemo.service.NoteService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -85,8 +82,20 @@ public class NoteServiceImpl implements NoteService {
                 "\"username\": \"lv15921470808\"}" +
                 "]";
 
-//        JSONArray jsonArray = JSONArray.parseArray(content);
-        List<NoteListDTO> cboardDataSyncDtos1 = JSON.parseArray(content,NoteListDTO.class);
+        JSONArray jsonArray = JSONArray.parseArray(content);
+        JSONArray jsonArray1 = new JSONArray();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+            Set<String> keys = jsonObject2.keySet();
+            for (String curKey : keys) {
+                if (curKey.equalsIgnoreCase("title")) {
+                    jsonObject2.put(curKey, jsonObject2.getString("title")+"--"+categoryId) ;
+                }
+            }
+            jsonArray1.add(jsonObject2);
+        }
+//        List<NoteListDTO> cboardDataSyncDtos1 = JSON.parseArray(content,NoteListDTO.class);
+        List<NoteListDTO> cboardDataSyncDtos1 = JSON.parseArray(jsonArray1.toString(),NoteListDTO.class);
 
 //
 //        Map m1 = new HashMap();

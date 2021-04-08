@@ -11,5 +11,6 @@ public class NoteListDTO {
     public String user_img;
     public String username;
     public String publish_time;
+    public String app_thumb;
 
 }
