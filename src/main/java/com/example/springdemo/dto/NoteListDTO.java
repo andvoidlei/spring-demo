@@ -12,5 +12,6 @@ public class NoteListDTO {
     public String username;
     public String publish_time;
     public String app_thumb;
+    public String trip_id;
 
 }
